@@ -323,7 +323,11 @@ func format(query string) string {
 			result = strings.TrimRight(result, " ")
 		}
 
-		result += highlighted + " "
+		result += highlighted
+
+		if !(token.Type == TokenTypeWord && strings.TrimRight(token.Val, ".") != token.Val) {
+			result += " "
+		}
 
 		// If the token shouldn't have a space after it
 		if token.Val == "(" || token.Val == "." {
